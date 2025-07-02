@@ -44,7 +44,7 @@
     <header>
 
         <nav class="cabecalho">
-            <a class="logo" href="index.php"></a>
+            <a class="logo" href="/"></a>
 
             <div class="cabecalho__icones">
                 <a href="formulario.php" class="cabecalho__videos"></a>

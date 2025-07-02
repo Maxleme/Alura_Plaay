@@ -8,12 +8,12 @@ $id = filter_input(INPUT_GET,"id", FILTER_VALIDATE_INT);
 
 $url = filter_input(INPUT_POST,"url", FILTER_SANITIZE_URL);
 if($url === false) {
-    header("Location: /index.php?sucesso=0");
+    header("Location: /?sucesso=0");
     exit();
 }
 $title = filter_input(INPUT_POST, "titulo");
 if($title === false) {
-    header("Location: /index.php?sucesso=0");
+    header("Location: /?sucesso=0");
     exit();
 }
 
@@ -25,7 +25,7 @@ $statement->bindValue(':title', $title);
 $statement->bindValue(':id', $id, PDO::PARAM_INT);
 
 if($statement->execute() === false) {
-    header('Location: /index.php?sucesso=0');
+    header('Location: /?sucesso=0');
 } else {
-    header('Location: /index.php?sucesso=1');
+    header('Location: /?sucesso=1');
 }

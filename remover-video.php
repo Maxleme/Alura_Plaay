@@ -10,4 +10,4 @@ $statement->bindValue(1, $id);
 $statement->execute();
 
 
-header('Location: index.php?success=1');
+header('Location: /?success=1');
