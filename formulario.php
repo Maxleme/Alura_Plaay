@@ -1,3 +1,27 @@
+<?php 
+
+    $path = __DIR__ ."/banco.sqlite";
+    $pdo = new PDO("sqlite:" . $path);
+
+    $id_editar = filter_input(INPUT_GET, 'id',  FILTER_VALIDATE_INT);
+    
+  
+    $video = [
+        'url' => '',
+        'title' => ''
+    ];
+
+    if (!empty($id_editar) || is_numeric($id_editar)) {
+        $sql = 'SELECT * FROM videos WHERE id = ?';
+        $statement = $pdo->prepare($sql);
+        $statement->bindValue(1, $id_editar, PDO::PARAM_INT);
+        $statement->execute();
+
+        $video = $statement->fetch(PDO::FETCH_ASSOC);
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -20,10 +44,10 @@
     <header>
 
         <nav class="cabecalho">
-            <a class="logo" href="../index.html"></a>
+            <a class="logo" href="index.php"></a>
 
             <div class="cabecalho__icones">
-                <a href="./enviar-video.html" class="cabecalho__videos"></a>
+                <a href="formulario.php" class="cabecalho__videos"></a>
                 <a href="../pages/login.html" class="cabecalho__sair">Sair</a>
             </div>
         </nav>
@@ -32,19 +56,19 @@
 
     <main class="container">
 
-        <form class="container__formulario">
-            <h2 class="formulario__titulo">Envie um vídeo!</h3>
+        <form class="container__formulario" action="<?= empty($id_editar) ? 'novo-video.php' : 'editar-video.php?id=' . $id_editar; ?>" method="post">
+            <h2 class="formulario__titulo">Envie um vídeo!</h2>
                 <div class="formulario__campo">
                     <label class="campo__etiqueta" for="url">Link embed</label>
                     <input name="url" class="campo__escrita" required
-                        placeholder="Por exemplo: https://www.youtube.com/embed/FAY1K2aUg5g" id='url' />
+                        placeholder="Por exemplo: https://www.youtube.com/embed/FAY1K2aUg5g" id='url' value="<?= $video['url'] ?>"/>
                 </div>
 
 
                 <div class="formulario__campo">
                     <label class="campo__etiqueta" for="titulo">Titulo do vídeo</label>
                     <input name="titulo" class="campo__escrita" required placeholder="Neste campo, dê o nome do vídeo"
-                        id='titulo' />
+                        id='titulo' value="<?= $video['title'] ?>" />
                 </div>
 
                 <input class="formulario__botao" type="submit" value="Enviar" />
