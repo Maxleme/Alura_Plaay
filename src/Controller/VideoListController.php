@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Alura\Mvc\Controller;
 use Alura\Mvc\Repository\VideoRepository;
-use PDO;
 
 class VideoListController
 {
@@ -15,6 +14,6 @@ class VideoListController
     public function processaRequisicao()
     {
         $videos = $this->videoRepository->all();
-
+        require_once __DIR__ ."/../../Views/video-list.php";
     }
 }
