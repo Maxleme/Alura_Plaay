@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+
 return [
     'GET|/' => \Alura\Mvc\Controller\VideoListController::class,
     'GET|/novo-video' => \Alura\Mvc\Controller\VideoFormController::class,
@@ -12,5 +13,7 @@ return [
     'GET|/login' => \Alura\Mvc\Controller\LoginFormController::class,
     'POST|/login' => \Alura\Mvc\Controller\LoginController::class,
     'GET|/logout' => \Alura\Mvc\Controller\LogoutController::class,
-    'GET|/deletar-thumb' => \Alura\Mvc\Controller\DeleteThumbController::class
+    'GET|/deletar-thumb' => \Alura\Mvc\Controller\DeleteThumbController::class,
+    'GET|/videos-json' => \Alura\Mvc\Controller\JsonVideoListController::class,
+    'POST|/videos' => \Alura\Mvc\Controller\NewJsonVideoController::class,
 ];

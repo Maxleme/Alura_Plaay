@@ -19,7 +19,8 @@ class DeleteVideoController implements Controller
             header('Location: /?sucesso=0');
             return;
         }
-
+        $video = $this->videoRepository->find($id);
+        $this->videoRepository->deleteThumb($video);
         $success = $this->videoRepository->remove($id);
         if ($success === false) {
             header('Location: /?sucesso=0');
